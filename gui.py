@@ -1,46 +1,69 @@
 # import tkinter
 from tkinter import *
+from commands import copyFiles
 
 window = Tk()
 
 window.title("File Collector")
-# window.geometry("400x200")
 window.configure(background="#3E4149", pady=20, padx=40)
 
-# Heading
-heading_TXT = Label(window, foreground="white", text="File Collector",
-                    font=("Arial Bold", 24), background="#3E4149")
-heading_TXT.pack()
+# UI Functions ->
+
+origin = ''
+destination = ''
+extension = ''
+
+
+def clicked():
+
+    origin = searchdir_INPUT.get()
+    destination = destdir_INPUT.get()
+    extension = extension_INPUT.get()
+
+    copyFiles(origin, destination, extension)
+
+    complete()
+
+
+def complete():
+    status_LABEL.configure(text="Done.")
+
+# UI Layout ->
+
+    # Heading
+heading_LABEL = Label(window, foreground="white", text="File Collector",
+                      font=("Arial Bold", 24), background="#3E4149")
+heading_LABEL.pack()
 
 # Input Search Directory path
-input_TXT = Label(window, foreground="#BDBDBD",
-                  text="Complete path of directory to search:", background="#3E4149", pady=5)
-input_TXT.pack()
-searchdir_INP = Entry(window, width=35)
-searchdir_INP.pack()
+input_LABEL = Label(window, foreground="#BDBDBD",
+                    text="Complete path of directory to search:", background="#3E4149", pady=5)
+input_LABEL.pack()
+searchdir_INPUT = Entry(window, width=35)
+searchdir_INPUT.pack()
 
 # Input Destination Directory path
-output_TXT = Label(window, foreground="#BDBDBD",
-                   text="Complete path of directory to copy to:", background="#3E4149", pady=5)
-output_TXT.pack()
-destdir_INP = Entry(window, width=35)
-destdir_INP.pack()
+output_LABEL = Label(window, foreground="#BDBDBD",
+                     text="Complete path of directory to copy to:", background="#3E4149", pady=5)
+output_LABEL.pack()
+destdir_INPUT = Entry(window, width=35)
+destdir_INPUT.pack()
 
 # Input file extension
-extension_TXT = Label(window, foreground="#BDBDBD",
-                      text="Copy files with the extension [without '.']:", background="#3E4149", pady=5)
-extension_TXT.pack()
-extension_INP = Entry(window, width=35)
-extension_INP.pack()
+extension_LABEL = Label(window, foreground="#BDBDBD",
+                        text="Copy files with the extension [without '.']:", background="#3E4149", pady=5)
+extension_LABEL.pack()
+extension_INPUT = Entry(window, width=35)
+extension_INPUT.pack()
 
 # Run Button
-run_BTN = Button(window, text="Copy Files", font=("Arial Medium", 14),
-                 highlightbackground="#3E4149", background="#3E4149", foreground="#FFFFFF", pady=20, width=15)
-run_BTN.pack()
+run_BUTTON = Button(window, text="Copy Files", command=clicked, font=("Arial Medium", 14),
+                    highlightbackground="#3E4149", background="#3E4149", foreground="#FFFFFF", pady=20, width=15)
+run_BUTTON.pack()
 
 # Status
-status_TXT = Label(window, foreground="#BDBDBD",
-                   text="Ready...", background="#3E4149")
-status_TXT.pack()
+status_LABEL = Label(window, foreground="#BDBDBD",
+                     text="Ready...", background="#3E4149")
+status_LABEL.pack()
 
 window.mainloop()
